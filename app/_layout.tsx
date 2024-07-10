@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { Colors } from "@/constants/Colors";
+import { StatusBar } from "expo-status-bar";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,7 +31,7 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           contentStyle: {
-            paddingTop: 80,
+            paddingTop: 70,
             minHeight: "100%",
             width: "100%",
             paddingLeft: 20,
@@ -42,6 +43,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="+not-found" />
       </Stack>
+      <StatusBar style="light" backgroundColor={Colors.background} />
     </RootSiblingParent>
   );
 }

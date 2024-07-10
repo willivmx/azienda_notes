@@ -25,13 +25,12 @@ const HomeScreen = () => {
     await AsyncStorage.getItem("notes").then((value) => {
       if (value) {
         setStorageNotes(JSON.parse(value));
-        setNotes(storageNotes);
+        setNotes(JSON.parse(value));
       }
     });
   };
 
   useEffect(() => {
-    console.log(search.length);
     if (search.length > 0) {
       setNotes(
         storageNotes.filter(

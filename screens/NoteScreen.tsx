@@ -14,6 +14,12 @@ import { randomUUID } from "expo-crypto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-root-toast";
 import { Note } from "@/app-types";
+import RNPickerSelect from "react-native-picker-select";
+const PriorityOptions = [
+  { value: 1, label: "Low" },
+  { value: 2, label: "Medium" },
+  { value: 3, label: "High" },
+];
 
 const NoteScreen = ({ note }: { note?: Note }) => {
   const [title, setTitle] = useState(note?.title || "");
@@ -61,6 +67,44 @@ const NoteScreen = ({ note }: { note?: Note }) => {
           >
             <Entypo name="chevron-left" size={30} color={Colors.text} />
           </TouchableOpacity>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 6,
+              borderRadius: 10,
+              padding: 16,
+            }}
+          >
+            <RNPickerSelect
+              onValueChange={setPriority}
+              items={PriorityOptions}
+              value={priority}
+              fixAndroidTouchableBug={true}
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Select an priority",
+              }}
+              style={{
+                inputIOS: {
+                  color: Colors.text,
+                },
+                inputAndroid: {
+                  color: Colors.text,
+                },
+              }}
+            />
+            <Entypo
+              name="chevron-left"
+              size={10}
+              color={Colors.text}
+              style={{
+                transform: [{ rotate: "-90deg" }],
+              }}
+            />
+          </View>
           <View style={{ flexDirection: "row", gap: 12 }}>
             {note && (
               <TouchableOpacity
@@ -202,18 +246,19 @@ const NoteScreen = ({ note }: { note?: Note }) => {
         >
           <TextInput
             placeholder={"Title"}
+            placeholderTextColor={"rgba(255,255,255,0.6)"}
             multiline={true}
             onChangeText={setTitle}
             value={title}
             style={{
               fontSize: 60,
-              fontWeight: 700,
               color: Colors.text,
               lineHeight: 60,
             }}
           />
           <TextInput
             placeholder={"Type something..."}
+            placeholderTextColor={"rgba(255,255,255,0.6)"}
             multiline={true}
             onChangeText={setContent}
             value={content}
